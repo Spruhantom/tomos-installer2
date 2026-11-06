@@ -40,6 +40,16 @@ A custom, neon-punk system installer for **[Tom OS](https://github.com/Spruhanto
 
 The screenshots come from the installer's `--demo` mode (same window, simulated disks and install).
 
+## Quick installation
+
+On a supported Linux distribution (Ubuntu, Debian, Linux Mint, Pop!_OS, Arch, Omarchy, EndeavourOS, Manjaro or Fedora), run the bootstrap installer as your normal user:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Spruhantom/tomos-installer2/main/install.sh | bash
+```
+
+The script installs build dependencies, checks that GTK 4.12 or newer is available, installs the stable Rust toolchain if needed, builds the application from source, and installs the binary and desktop launcher. It requests administrator privileges only for system package and file installation. It does not partition or format disks during installation of the application.
+
 ## Using it
 
 On the Tom OS live USB:
