@@ -48,17 +48,18 @@ GTK_VERSION="$(pkg-config --modversion gtk4 2>/dev/null || true)"
 GTK_MIN="$(printf '%s\n' 4.12 "$GTK_VERSION" | sort -V | head -n1)"
 [[ "$GTK_MIN" == "4.12" ]] || die "GTK4 $GTK_VERSION found; version 4.12 or newer is required."
 
-if ! command -v cargo >/dev/null 2>&1 || ! command -v rustc >/dev/null 2>&1; then
-  log "Installing stable Rust for the current user."
+if ! command -v rustup >/dev/null 2>&1; then
+  log "Installing rustup and the stable Rust toolchain for the current user."
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain stable
 fi
 if [[ -f "$HOME/.cargo/env" ]]; then
   # shellcheck disable=SC1091
   source "$HOME/.cargo/env"
 fi
+command -v rustup >/dev/null 2>&1 || die "rustup is unavailable; open a new terminal and retry."
+rustup toolchain install stable --profile minimal
+rustup default stable
 command -v cargo >/dev/null 2>&1 || die "Cargo is unavailable; open a new terminal and retry."
-rustup update stable >/dev/null 2>&1 || true
-rustup default stable >/dev/null 2>&1 || true
 
 log "Downloading TomOS Installer 2."
 curl --fail --location --silent --show-error "https://github.com/Spruhantom/tomos-installer2/archive/refs/heads/$BRANCH.tar.gz" -o "$TMP_DIR/source.tar.gz"
