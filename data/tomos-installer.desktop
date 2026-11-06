@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Install Tom OS
+GenericName=System Installer
+Comment=Install Tom OS on this computer
+Exec=tomos-installer
+Icon=tomos
+Terminal=false
+Categories=System;
+Keywords=install;installer;setup;disk;
+StartupNotify=true
